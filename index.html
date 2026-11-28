@@ -17,7 +17,7 @@
   --accent: #1b4f91; --accent-soft: rgba(27, 79, 145, .08); --accent-line: #c3d3e8;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
   --serif: Charter, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Noto Serif", "Songti SC", serif;
-  --col: 156px; /* shared label column: award years and service roles line up */
+  --col: 108px; /* shared label column: award years and service roles line up */
 }
 :root[data-theme="dark"] {
   --bg: #111519; --plate: #eef1f4; --ink: #e6eaef; --ink-2: #c2c9d1; --muted: #96a0ab; --line: #272e37;
@@ -121,9 +121,9 @@ a.tag:hover { background: var(--accent); color: var(--bg); }
 
 /* awards and service share one label column */
 ul.plain { list-style: none; padding: 0; margin: 0; }
-.list2 li { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 24px; padding: 5px 0; }
+.list2 li { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 20px; padding: 5px 0; }
 .list2 li span:last-child { flex: none; width: var(--col); color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
-#service { display: grid; grid-template-columns: var(--col) minmax(0, 1fr); column-gap: 24px; row-gap: 14px; }
+#service { display: grid; grid-template-columns: var(--col) minmax(0, 1fr); column-gap: 20px; row-gap: 14px; }
 #service h2 { grid-column: 1 / -1; margin-bottom: 6px; }
 #service h3.sub { font-weight: 400; font-size: 16px; line-height: 1.65; }
 #service ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
