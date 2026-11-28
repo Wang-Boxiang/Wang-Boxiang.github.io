@@ -5,91 +5,172 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Boxiang Wang</title>
 <meta name="description" content="Boxiang Wang, Ph.D. Candidate at Nanyang Technological University. Research on deep learning-based active noise control, adaptive filtering and spatial audio.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111519" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231b4f91'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='29' font-weight='700' text-anchor='middle' fill='%23fff'%3EBW%3C/text%3E%3C/svg%3E">
 <style>
-/* Layout: fixed top nav, sticky left profile sidebar, single scrolling content column (academic homepage pattern). */
+/* Layout: sticky top nav, sticky left profile sidebar, one scrolling content column (academic homepage pattern).
+   Type: serif for the name and section headings, system sans for everything else. No web fonts, no frameworks. */
 :root {
-  --bg: #ffffff; --ink: #2b2f33; --muted: #6b737b; --line: #e6e8eb; --soft: #f5f7f9;
-  --accent: #17365d; --accent-ink: #1f4f8a; --hl: #1f4f8a;
-  --f: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --bg: #ffffff; --plate: #ffffff; --ink: #1c2126; --ink-2: #3f4852; --muted: #66707a; --line: #e4e7eb;
+  --accent: #1b4f91; --accent-soft: rgba(27, 79, 145, .08); --accent-line: #c3d3e8;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --serif: Charter, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Noto Serif", "Songti SC", serif;
+  --col: 156px; /* shared label column: award years and service roles line up */
 }
 :root[data-theme="dark"] {
-  --bg: #15191e; --ink: #dde3e9; --muted: #98a3ad; --line: #2a323b; --soft: #1c2229;
-  --accent: #8fb6e8; --accent-ink: #8fb6e8; --hl: #9cc2f0; color-scheme: dark;
+  --bg: #111519; --plate: #eef1f4; --ink: #e6eaef; --ink-2: #c2c9d1; --muted: #96a0ab; --line: #272e37;
+  --accent: #8db8f2; --accent-soft: rgba(141, 184, 242, .13); --accent-line: #2f4666; color-scheme: dark;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 64px; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 var(--f); }
-a { color: var(--accent-ink); text-decoration: none; }
-a:hover { text-decoration: underline; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.65 var(--sans); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+::selection { background: var(--accent-soft); }
+a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: var(--accent-line); transition: color .15s, text-decoration-color .15s; }
+a:hover { text-decoration-color: currentColor; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
 
 /* top nav */
 .topnav { position: sticky; top: 0; z-index: 10; background: var(--bg); border-bottom: 1px solid var(--line); }
-.topnav .inner { max-width: 1180px; margin: 0 auto; padding: 0 20px; height: 52px; display: flex; align-items: center; gap: 26px; overflow-x: auto; }
-.topnav .brand { font-weight: 700; color: var(--ink); white-space: nowrap; border-bottom: 2px solid var(--ink); padding-bottom: 2px; }
-.topnav a.link { color: var(--ink); font-size: 15.5px; white-space: nowrap; }
-.topnav a.link:hover { color: var(--accent-ink); text-decoration: none; }
-.toggle { margin-left: auto; background: none; border: 0; cursor: pointer; color: var(--muted); font-size: 17px; padding: 4px; }
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .topnav { background: color-mix(in srgb, var(--bg) 84%, transparent); -webkit-backdrop-filter: saturate(1.6) blur(12px); backdrop-filter: saturate(1.6) blur(12px); }
+}
+.topnav .inner { max-width: 1080px; margin: 0 auto; padding: 0 28px; height: 56px; display: flex; align-items: center; gap: 30px; }
+.topnav a { text-decoration: none; }
+.topnav .brand { font: 700 18px/1 var(--serif); color: var(--ink); white-space: nowrap; letter-spacing: -.005em; }
+.topnav .links { flex: 1; min-width: 0; align-self: stretch; display: flex; align-items: stretch; gap: 24px; overflow-x: auto; scrollbar-width: none; }
+.topnav .links::-webkit-scrollbar { display: none; }
+.topnav a.link { display: flex; align-items: center; color: var(--muted); font-size: 14.5px; white-space: nowrap; border-bottom: 2px solid transparent; border-top: 2px solid transparent; margin-bottom: -1px; }
+.topnav a.link:hover { color: var(--ink); }
+.topnav a.link.on { color: var(--ink); border-bottom-color: var(--accent); }
+.toggle { flex: none; width: 34px; height: 34px; margin-right: -8px; display: grid; place-items: center; background: none; border: 0; border-radius: 8px; cursor: pointer; color: var(--muted); }
+.toggle:hover { color: var(--ink); background: var(--accent-soft); }
+.toggle svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.toggle .sun, :root[data-theme="dark"] .toggle .moon { display: none; }
+:root[data-theme="dark"] .toggle .sun { display: block; }
 
 /* page grid */
-.page { max-width: 1180px; margin: 0 auto; padding: 28px 20px 60px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 48px; }
-aside { position: sticky; top: 76px; align-self: start; font-size: 14.5px; }
-.avatar { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; display: grid; place-items: center;
-  background: linear-gradient(135deg, var(--accent), #3d6fa8); color: #fff; font-size: 46px; font-weight: 600; letter-spacing: 1px; }
-aside h3 { margin: 14px 0 2px; font-size: 18px; }
-aside .bio { color: var(--muted); margin: 0 0 12px; line-height: 1.45; }
-aside ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 7px; }
-aside li { display: flex; gap: 8px; align-items: center; color: var(--muted); }
-aside li svg { width: 14px; height: 14px; flex: none; fill: currentColor; }
-aside li a { color: var(--muted); }
-aside li a:hover { color: var(--accent-ink); }
+.page { max-width: 1080px; margin: 0 auto; padding: 48px 28px 72px; display: grid; grid-template-columns: 232px minmax(0, 1fr); gap: 64px; }
+aside { position: sticky; top: 104px; align-self: start; font-size: 14.5px; }
+.avatar { width: 164px; height: 164px; border-radius: 50%; object-fit: cover; display: grid; place-items: center;
+  background: linear-gradient(135deg, #1b4f91, #4a7fc0); color: #fff; font: 600 48px var(--serif); box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--line); }
+aside h1 { margin: 22px 0 6px; font: 700 28px/1.15 var(--serif); letter-spacing: -.01em; }
+aside .bio { color: var(--muted); margin: 0; line-height: 1.5; }
+aside ul { list-style: none; padding: 18px 0 0; margin: 18px 0 0; border-top: 1px solid var(--line); display: grid; gap: 9px; }
+aside li { display: flex; gap: 10px; align-items: flex-start; color: var(--ink-2); line-height: 1.45; }
+aside li svg { width: 15px; height: 15px; margin-top: 3px; flex: none; fill: var(--muted); }
+aside li a { color: var(--ink-2); text-decoration: none; }
+aside li a:hover { color: var(--accent); }
+aside li a:hover svg { fill: currentColor; }
+aside li.i-cv { margin-top: 8px; }
+aside li.i-cv a { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px 7px 12px; border: 1px solid var(--accent-line); border-radius: 8px; color: var(--accent); font-weight: 600; background: var(--accent-soft); }
+aside li.i-cv a:hover { border-color: var(--accent); }
+aside li.i-cv svg { margin: 0; fill: currentColor; }
 
 /* content */
-main { min-width: 0; max-width: 820px; }
-section { padding-bottom: 10px; }
-h2 { font-size: 24px; margin: 34px 0 16px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
-#about > p:first-child { margin-top: 0; }
-.interests li { margin: 6px 0; }
-.interests b { color: var(--ink); }
-.entry { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 20px; padding: 14px 0; border-bottom: 1px dashed var(--line); }
-.entry:last-child { border-bottom: 0; }
-.entry .role { font-weight: 700; }
-.entry .org { font-weight: 600; }
-.entry .place { color: var(--ink); }
-.entry .dates { font-style: italic; color: var(--muted); }
-.entry .logo { grid-row: span 4; align-self: start; font-weight: 800; font-size: 20px; letter-spacing: .5px; color: var(--accent); text-align: right; min-width: 120px; }
-.entry .logo { display: flex; justify-content: center; align-items: center; gap: 10px; width: 150px; height: 72px; }
-.entry .logo img { display: block; max-width: 100%; height: auto; }
-:root[data-theme="dark"] .entry .logo img { background: #fff; padding: 4px 6px; border-radius: 4px; }
-.entry .desc { grid-column: 1 / -1; margin-top: 6px; }
-.entry .desc p { margin: 4px 0; }
-h3.sub { font-size: 17px; margin: 22px 0 10px; }
-.pub { border-left: 3px solid var(--accent); background: var(--soft); padding: 10px 14px; margin: 0 0 14px; }
-.pub .t { font-weight: 700; font-size: 17px; line-height: 1.4; }
-.pub .t a { color: var(--ink); }
-.pub .t a:hover { color: var(--accent-ink); }
-.pub .a { margin-top: 3px; }
-.pub .a b { color: var(--hl); }
-.pub .v { font-style: italic; color: var(--muted); }
-.pub .tags { margin-top: 3px; font-size: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
-.tag { padding: 0 7px; border-radius: 3px; border: 1px solid var(--line); color: var(--muted); }
-.tag.first { color: var(--accent-ink); border-color: var(--accent-ink); }
-.tag.link { color: var(--accent-ink); }
-.list2 li { display: flex; justify-content: space-between; gap: 12px; padding: 2px 0; }
-.list2 li span:last-child { color: var(--muted); white-space: nowrap; }
-ul.plain { list-style: none; padding: 0; margin: 0; }
-footer { color: var(--muted); font-size: 14px; margin-top: 40px; }
-a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+main { min-width: 0; }
+section { margin-top: 56px; }
+#about { margin-top: 0; }
+h2 { position: relative; font: 700 25px/1.25 var(--serif); letter-spacing: -.005em; margin: 0 0 20px; padding-bottom: 11px; border-bottom: 1px solid var(--line); }
+h2::after { content: ""; position: absolute; left: 0; bottom: -1px; width: 44px; height: 2px; background: var(--accent); }
+p { margin: 0 0 12px; }
+#about > p:first-child { font-size: 18.5px; line-height: 1.6; margin-bottom: 22px; }
+#about > p { color: var(--ink-2); }
+#about > p:first-child { color: var(--ink); }
+.interests { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 14px; }
+.interests li { padding-left: 16px; border-left: 2px solid var(--accent-line); }
+.interests b { display: block; font-weight: 600; color: var(--ink); }
+.interests .dash { display: none; }
+.interests .txt { display: block; color: var(--ink-2); font-size: 15.5px; }
+.interests .txt::first-letter { text-transform: uppercase; }
 
-@media (max-width: 860px) {
-  .page { grid-template-columns: 1fr; gap: 20px; }
-  aside { position: static; display: grid; grid-template-columns: 110px 1fr; gap: 6px 18px; align-items: center; }
-  .avatar { width: 100px; height: 100px; font-size: 32px; grid-row: span 3; }
-  aside h3 { margin: 0; }
-  aside ul { grid-column: 1 / -1; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
-  .entry .logo { grid-row: auto; text-align: left; font-size: 16px; }
-  .entry { grid-template-columns: 1fr; }
+/* education and experience */
+.entry { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+h2 + .entry { padding-top: 2px; }
+.entry:last-child { border-bottom: 0; padding-bottom: 0; }
+.entry .role { font-weight: 600; font-size: 17px; line-height: 1.4; }
+.entry .org { color: var(--ink-2); margin-top: 1px; }
+.entry .place, .entry .dates { display: inline; color: var(--muted); font-size: 14.5px; }
+.entry .place::after { content: "\00a0\00b7\00a0"; }
+.entry .logo { grid-column: 2; grid-row: 1; align-self: center; width: 132px; height: 64px; display: flex; justify-content: center; align-items: center; gap: 10px;
+  font-weight: 700; font-size: 17px; color: var(--muted); }
+.entry .logo img { display: block; width: auto; height: auto; max-width: 100%; max-height: min(calc(54px * var(--s, 1)), 72px); min-width: 0; }
+:root[data-theme="dark"] .entry .logo:has(img) { background: var(--plate); border-radius: 10px; padding: 5px 12px; }
+:root[data-theme="dark"] .entry .logo img { max-height: min(calc(46px * var(--s, 1)), 54px); }
+.entry .desc { grid-column: 1 / -1; margin-top: 10px; color: var(--ink-2); font-size: 15.5px; }
+.entry .desc p { margin: 3px 0; }
+
+/* publications: numbered list, one hairline between items */
+h3.sub { font: 600 15px/1.4 var(--sans); color: var(--muted); margin: 0; }
+#publications h3.sub { counter-reset: pub; font-size: 13px; letter-spacing: .09em; text-transform: uppercase; margin: 30px 0 2px; }
+#publications h2 + h3.sub { margin-top: 0; }
+.pub { counter-increment: pub; position: relative; padding: 15px 0 15px 38px; border-bottom: 1px solid var(--line); }
+.pub::before { content: counter(pub); position: absolute; left: 0; top: 17px; width: 22px; text-align: right; font-size: 13.5px; line-height: 1.4; color: var(--muted); font-variant-numeric: tabular-nums; }
+.pub .t { font-weight: 600; font-size: 16.5px; line-height: 1.4; color: var(--ink); }
+.pub .t a { color: inherit; text-decoration: none; }
+.pub .t a:hover { color: var(--accent); }
+.pub .a { margin-top: 4px; font-size: 15px; color: var(--ink-2); }
+.pub .a b { color: var(--ink); font-weight: 700; }
+.pub .v { display: inline; font-size: 15px; font-style: italic; color: var(--muted); }
+.pub .v .st { font-style: normal; }
+.pub .tags { display: inline-flex; flex-wrap: wrap; gap: 6px; margin-left: 8px; vertical-align: 1px; }
+.tag { font-size: 12.5px; line-height: 1.5; padding: 0 9px; border-radius: 999px; background: var(--accent-soft); color: var(--muted); }
+a.tag { color: var(--accent); font-weight: 600; text-decoration: none; }
+a.tag:hover { background: var(--accent); color: var(--bg); }
+
+/* awards and service share one label column */
+ul.plain { list-style: none; padding: 0; margin: 0; }
+.list2 li { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 24px; padding: 5px 0; }
+.list2 li span:last-child { flex: none; width: var(--col); color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+#service { display: grid; grid-template-columns: var(--col) minmax(0, 1fr); column-gap: 24px; row-gap: 14px; }
+#service h2 { grid-column: 1 / -1; margin-bottom: 6px; }
+#service h3.sub { font-weight: 400; font-size: 16px; line-height: 1.65; }
+#service ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
+footer { color: var(--muted); font-size: 13.5px; margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--line); }
+
+@media (max-width: 900px) {
+  html { scroll-padding-top: 68px; }
+  .topnav .inner { padding: 0 20px; height: 52px; gap: 22px; }
+  .topnav .links { gap: 22px; -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent); }
+  .topnav .links::after { content: ""; flex: none; width: 6px; } /* lets the last link scroll clear of the fade */
+  .page { grid-template-columns: minmax(0, 1fr); gap: 32px; padding: 28px 20px 56px; }
+  aside { position: static; display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 20px; align-items: center; }
+  .avatar { width: 96px; height: 96px; font-size: 30px; grid-row: 1 / span 2; }
+  aside h1 { margin: 0; font-size: 26px; align-self: end; }
+  aside .bio { margin-top: 5px; align-self: start; }
+  aside ul { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 9px 20px; }
+  aside li.i-cv { margin-top: 0; }
+  aside li.i-pin, aside li.i-uni { display: none; } /* the line under the name already says both */
+  section { margin-top: 44px; }
+  h2 { font-size: 23px; margin-bottom: 16px; }
+  #about > p:first-child { font-size: 17.5px; }
 }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@media (max-width: 600px) {
+  .topnav .brand { display: none; }
+  .avatar { width: 84px; height: 84px; }
+  .entry { column-gap: 14px; }
+  .entry .logo { width: auto; height: auto; max-width: 88px; gap: 8px; align-self: start; margin-top: 3px; }
+  .entry .logo img { max-height: min(calc(38px * var(--s, 1)), 52px); }
+  :root[data-theme="dark"] .entry .logo:has(img) { padding: 5px 8px; border-radius: 8px; }
+  :root[data-theme="dark"] .entry .logo img { max-height: min(calc(32px * var(--s, 1)), 40px); }
+  .pub { padding-left: 28px; }
+  .pub::before { width: 18px; }
+  .list2 li { gap: 12px; }
+  .list2 li span:last-child { width: 84px; font-size: 14.5px; padding-top: 1px; }
+  #service { grid-template-columns: minmax(0, 1fr); row-gap: 4px; }
+  #service h3.sub { color: var(--muted); font-size: 14.5px; margin-top: 10px; }
+  #service h2 + h3.sub { margin-top: 0; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } a { transition: none; } }
+@media print {
+  .topnav { display: none; }
+  .page { display: block; padding: 0; max-width: none; }
+  aside { position: static; margin-bottom: 24px; }
+  a { color: inherit; text-decoration: none; }
+  .entry, .pub { break-inside: avoid; }
+  h2, h3 { break-after: avoid; }
+}
 </style>
 <script>
 (function () {
@@ -103,44 +184,49 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-ink); ou
 <body>
 <nav class="topnav" aria-label="Sections"><div class="inner">
   <a class="brand" href="#">Boxiang Wang</a>
-  <a class="link" href="#about">About</a>
-  <a class="link" href="#education">Education</a>
-  <a class="link" href="#experience">Experience</a>
-  <a class="link" href="#publications">Publications</a>
-  <a class="link" href="#awards">Awards</a>
-  <a class="link" href="#service">Service</a>
-  <a class="link" href="#cv">CV</a>
-  <a class="link" href="#contact">Contact</a>
-  <button class="toggle" id="toggle" type="button" aria-label="Toggle dark mode">&#9680;</button>
+  <div class="links">
+    <a class="link" href="#about">About</a>
+    <a class="link" href="#education">Education</a>
+    <a class="link" href="#experience">Experience</a>
+    <a class="link" href="#publications">Publications</a>
+    <a class="link" href="#awards">Awards</a>
+    <a class="link" href="#service">Service</a>
+    <a class="link" href="#cv">CV</a>
+    <a class="link" href="#contact">Contact</a>
+  </div>
+  <button class="toggle" id="toggle" type="button" aria-label="Toggle dark mode">
+    <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.2A8.5 8.5 0 1 1 10.8 3.5a6.6 6.6 0 0 0 9.7 9.7z"/></svg>
+    <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M2.5 12h2M19.5 12h2M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>
+  </button>
 </div></nav>
 
 <div class="page">
 <aside>
   <img class="avatar" src="profile.jpg" alt="Boxiang Wang">
-  <h3>Boxiang Wang</h3>
+  <h1>Boxiang Wang</h1>
   <p class="bio">Ph.D. Candidate at Nanyang Technological University, Singapore.</p>
-  <ul><li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a5 5 0 0 0-5 5c0 3.6 5 11 5 11s5-7.4 5-11a5 5 0 0 0-5-5zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg><span>Singapore</span></li><li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0 0 4v1h16V4L8 0zM1 6v7h2V6H1zm4 0v7h2V6H5zm4 0v7h2V6H9zm4 0v7h2V6h-2zM0 14v2h16v-2H0z"/></svg><span>Nanyang Technological University</span></li><li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M0 3v10h16V3H0zm2 1.5 6 4.2 6-4.2V5L8 9.2 2 5v-.5z"/></svg><a href="mailto:boxiang001@e.ntu.edu.sg">Email</a></li><li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1 0 6l3 1.9V12c0 1.7 2.2 3 5 3s5-1.3 5-3V7.9L16 6 8 1zm0 2.3L12.2 6 8 8.7 3.8 6 8 3.3z"/></svg><a href="https://scholar.google.com/citations?user=rjAapxEAAAAJ" target="_blank" rel="noopener">Google Scholar</a></li><li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M0 1.5C0 .7.7 0 1.5 0h13c.8 0 1.5.7 1.5 1.5v13c0 .8-.7 1.5-1.5 1.5h-13C.7 16 0 15.3 0 14.5v-13zM3 6v7h2.2V6H3zm1.1-3.6a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6zM6.6 6v7h2.2V9.4c0-1 .6-1.6 1.4-1.6.8 0 1.2.6 1.2 1.6V13h2.2V9c0-2-1.1-3.2-2.8-3.2-1 0-1.7.5-2 1V6H6.6z"/></svg><a href="https://www.linkedin.com/in/boxiang-wang-477466373/" target="_blank" rel="noopener">LinkedIn</a></li><li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.5 15.6c.4.1.5-.2.5-.4v-1.4c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.2 1.9.9 2.3.7.1-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8a7.6 7.6 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.4 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.7-3.6 3.9.3.3.5.8.5 1.5v2.2c0 .2.1.5.6.4A8 8 0 0 0 8 0z"/></svg><a href="https://github.com/Wang-Boxiang" target="_blank" rel="noopener">GitHub</a></li></ul>
+  <ul><li class="i-pin"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a5 5 0 0 0-5 5c0 3.6 5 11 5 11s5-7.4 5-11a5 5 0 0 0-5-5zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg><span>Singapore</span></li><li class="i-uni"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0 0 4v1h16V4L8 0zM1 6v7h2V6H1zm4 0v7h2V6H5zm4 0v7h2V6H9zm4 0v7h2V6h-2zM0 14v2h16v-2H0z"/></svg><span>Nanyang Technological University</span></li><li class="i-mail"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M0 3v10h16V3H0zm2 1.5 6 4.2 6-4.2V5L8 9.2 2 5v-.5z"/></svg><a href="mailto:boxiang001@e.ntu.edu.sg">Email</a></li><li class="i-scholar"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1 0 6l3 1.9V12c0 1.7 2.2 3 5 3s5-1.3 5-3V7.9L16 6 8 1zm0 2.3L12.2 6 8 8.7 3.8 6 8 3.3z"/></svg><a href="https://scholar.google.com/citations?user=rjAapxEAAAAJ" target="_blank" rel="noopener">Google Scholar</a></li><li class="i-in"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M0 1.5C0 .7.7 0 1.5 0h13c.8 0 1.5.7 1.5 1.5v13c0 .8-.7 1.5-1.5 1.5h-13C.7 16 0 15.3 0 14.5v-13zM3 6v7h2.2V6H3zm1.1-3.6a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6zM6.6 6v7h2.2V9.4c0-1 .6-1.6 1.4-1.6.8 0 1.2.6 1.2 1.6V13h2.2V9c0-2-1.1-3.2-2.8-3.2-1 0-1.7.5-2 1V6H6.6z"/></svg><a href="https://www.linkedin.com/in/boxiang-wang-477466373/" target="_blank" rel="noopener">LinkedIn</a></li><li class="i-gh"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.5 15.6c.4.1.5-.2.5-.4v-1.4c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.2 1.9.9 2.3.7.1-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8a7.6 7.6 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.4 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.7-3.6 3.9.3.3.5.8.5 1.5v2.2c0 .2.1.5.6.4A8 8 0 0 0 8 0z"/></svg><a href="https://github.com/Wang-Boxiang" target="_blank" rel="noopener">GitHub</a></li><li class="i-cv"><a href="Boxiang_Wang_CV.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M7 1h2v6.5h3L8 12 4 7.5h3V1zM2 13.5h12v1.5H2v-1.5z"/></svg>CV</a></li></ul>
 </aside>
 
 <main>
-  <section id="about"><p>I am a Ph.D. candidate in Electrical and Electronic Engineering at Nanyang Technological University (NTU), Singapore. My research focuses on deep learning-based active noise control and spatial audio for hearables and other audio devices.</p><p>My research interests include:</p><ul class="interests"><li><b>Deep Learning for Audio Front-End Processing</b> — combining deep learning with adaptive filtering for active noise control that adapts to varying noise sources and users in hearables and rooms.</li><li><b>Spatial Audio and Augmented Hearing</b> — multi-microphone sound source localization and tracking in reverberant environments, and spatially selective noise control that preserves target sounds.</li><li><b>Real-Time Audio Systems</b> — low-latency, on-device implementation of adaptive and learning-based algorithms on embedded platforms, from prototype to measured performance on physical devices.</li></ul></section>
+  <section id="about"><p>I am a Ph.D. candidate in Electrical and Electronic Engineering at Nanyang Technological University, Singapore. My research focuses on deep learning-based active noise control and spatial audio for hearables and other audio devices.</p><p>My research interests include:</p><ul class="interests"><li><b>Deep Learning for Audio Front-End Processing</b><span class="dash"> — </span><span class="txt">combining deep learning with adaptive filtering for active noise control that adapts to varying noise sources and users in hearables and rooms.</span></li><li><b>Spatial Audio and Augmented Hearing</b><span class="dash"> — </span><span class="txt">multi-microphone sound source localization and tracking in reverberant environments, and spatially selective noise control that preserves target sounds.</span></li><li><b>Real-Time Audio Systems</b><span class="dash"> — </span><span class="txt">low-latency, on-device implementation of adaptive and learning-based algorithms on embedded platforms, from prototype to measured performance on physical devices.</span></li></ul></section>
 
-  <section id="education"><h2>Education</h2><div class="entry"><div><div class="role">Ph.D. in Electrical and Electronic Engineering</div><div class="org">Nanyang Technological University (NTU), Singapore</div>
-<div class="dates">August 2023 – June 2027 (expected)</div></div><div class="logo"><img src="logo-ntu_crest.png" width="49" height="66" alt="Nanyang Technological University (NTU), Singapore logo"></div><div class="desc"><p>Thesis: Deep Learning-Based Active Noise Control under Dynamic Acoustic Conditions.</p><p>Supervisor: Prof. Woon-Seng Gan.</p></div></div><div class="entry"><div><div class="role">B.Eng. in Electronic and Information Engineering (First Class Honours)</div><div class="org">University College Dublin and Beijing University of Technology</div>
+  <section id="education"><h2>Education</h2><div class="entry"><div><div class="role">Ph.D. in Electrical and Electronic Engineering</div><div class="org">Nanyang Technological University, Singapore</div>
+<div class="dates">August 2023 – June 2027 (expected)</div></div><div class="logo"><img src="logo-ntu_crest.png" width="51" height="66" alt="Nanyang Technological University, Singapore logo"></div><div class="desc"><p>Thesis: Deep Learning-Based Active Noise Control under Dynamic Acoustic Conditions.</p><p>Supervisor: Prof. Woon-Seng Gan.</p></div></div><div class="entry"><div><div class="role">B.Eng. in Electronic and Information Engineering (First Class Honours)</div><div class="org">University College Dublin and Beijing University of Technology</div>
 <div class="dates">September 2018 – July 2022</div></div><div class="logo"><img src="logo-ucd.png" width="45" height="66" alt="University College Dublin and Beijing University of Technology logo"><img src="logo-bjut.svg" width="65" height="65" alt=""></div><div class="desc"><p>Thesis: 5G New Radio Positioning Reference Signals Detection Algorithm Design and Simulation.</p><p>GPA 3.98/4.20 (top 5%).</p></div></div></section>
 
   <section id="experience"><h2>Experience</h2><div class="entry"><div><div class="role">Audio Engineer Intern</div><div class="org">Huawei Research Center</div>
 <div class="place">Singapore</div><div class="dates">August 2025 – February 2027 (expected)</div></div><div class="logo"><img src="logo-huawei.png" width="140" height="24" alt="Huawei Research Center logo"></div><div class="desc"><p>Mentors: Jia Hao and Dong Shi.</p><p>Spatial active noise control for projector fan noise: implemented feedback active noise control on chip and extended it with virtual sensing. Contributed to a patent application.</p></div></div><div class="entry"><div><div class="role">Research Collaborator</div><div class="org">German Aerospace Center (DLR)</div>
-<div class="place">Singapore</div><div class="dates">August 2024 – April 2025</div></div><div class="logo"><img src="logo-dlr.png" width="71" height="59" alt="German Aerospace Center (DLR) logo"></div><div class="desc"><p>Mentor: Malte Misol.</p><p>Active trim panels for aircraft noise control: developed a deep learning-based active noise control method using measured aircraft data, published as a first-author paper at ICSV 2025.</p></div></div><div class="entry"><div><div class="role">Research Intern</div><div class="org">OPPO Research Institute</div>
+<div class="place">Singapore</div><div class="dates">August 2024 – April 2025</div></div><div class="logo" style="--s:1.3"><img src="logo-dlr.png" width="71" height="59" alt="German Aerospace Center (DLR) logo"></div><div class="desc"><p>Mentor: Malte Misol.</p><p>Active trim panels for aircraft noise control: developed a deep learning-based active noise control method using measured aircraft data, published as a first-author paper at ICSV 2025.</p></div></div><div class="entry"><div><div class="role">Research Intern</div><div class="org">OPPO Research Institute</div>
 <div class="place">Beijing, China</div><div class="dates">October 2022 – July 2023</div></div><div class="logo"><img src="logo-oppo.png" width="133" height="32" alt="OPPO Research Institute logo"></div><div class="desc"><p>Mentors: Wenhong Chen and Jinyu Zhang.</p><p>Indoor positioning based on time difference of arrival (TDOA): evaluated TDOA positioning algorithms through simulation. Contributed to a patent application.</p></div></div></section>
 
   <section id="publications"><h2>Publications</h2>
-    <h3 class="sub">Journal Papers</h3><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2607.12807" target="_blank" rel="noopener">Spatial-Frequency Cued Generative Fixed-Filter Active Noise Control Based on Deep Learning in Reverberant Environments</a></div><div class="a"><b>B. Wang</b>, H. Li, D. Shi, J. Ji, Z. Yang, Z. Luo, and W.-S. Gan</div><div class="v">Signal Processing, 2026.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2607.12807" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2609.30945" target="_blank" rel="noopener">Coupled Meta-Adaptive Filtering for Active Noise Control Under Time-Varying Acoustic Paths</a></div><div class="a"><b>B. Wang</b>, Z. Luo, Z. Yang, D. Shi, X. Liu, and W.-S. Gan</div><div class="v">Signal Processing (Under review).</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2609.30945" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t">Perturbation-Informed Deep Control Filter Generation for Active Noise Control in Hearables</div><div class="a"><b>B. Wang</b>, Z. Luo, D. Shi, J. Ji, and W.-S. Gan</div><div class="v">IEEE Signal Processing Letters (Under review).</div></div><div class="pub"><div class="t">Implementation of Predictive Selective Fixed-Filter Active Noise Control for Dynamic Noise Sources via Deep Learning-Based Frequency-Direction Forecasting</div><div class="a"><b>B. Wang</b>, J. Ji, Z. Luo, D. Shi, Z. Yang, and W.-S. Gan</div><div class="v">Mechanical Systems and Signal Processing (In preparation).</div></div><div class="pub"><div class="t"><a href="https://doi.org/10.1016/j.sigpro.2026.110695" target="_blank" rel="noopener">Reinforcement Learning-Based Selective Fixed-Filter Active Noise Control (RL-SFANC): From Theory to Real-Time Headphone Implementation</a></div><div class="a">Z. Luo, H. Ma, <b>B. Wang</b>, D. Shi, and W.-S. Gan</div><div class="v">Signal Processing, 2026.</div><div class="tags"><a class="tag link" href="https://doi.org/10.1016/j.sigpro.2026.110695" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2609.07173" target="_blank" rel="noopener">Direction-Preserving Active Noise Control with a Conditional Control-Filter Estimation Network</a></div><div class="a">Z. Yang, Z. Luo, <b>B. Wang</b>, L. Zhang, and W.-S. Gan</div><div class="v">IEEE/ACM Transactions on Audio, Speech, and Language Processing (Under review).</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2609.07173" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://doi.org/10.1016/j.ymssp.2025.113207" target="_blank" rel="noopener">Deep Learning-Based Generative Fixed-Filter Active Noise Control: Transferability and Implementation</a></div><div class="a">Z. Luo, J. Ji, <b>B. Wang</b>, D. Shi, H. Ma, and W.-S. Gan</div><div class="v">Mechanical Systems and Signal Processing, 2025.</div><div class="tags"><a class="tag link" href="https://doi.org/10.1016/j.ymssp.2025.113207" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2507.12045" target="_blank" rel="noopener">Self-Boosted Weight-Constrained FxLMS: A Robustness Distributed Active Noise Control Algorithm without Internode Communication</a></div><div class="a">J. Ji, D. Shi, Z. Luo, <b>B. Wang</b>, and W.-S. Gan</div><div class="v">IEEE Signal Processing Letters, 2025.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2507.12045" target="_blank" rel="noopener">Paper</a></div></div><h3 class="sub">Conference Papers</h3><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2604.23144" target="_blank" rel="noopener">Predictive Directional Selective Fixed-Filter Active Noise Control for Moving Sources via a Convolutional Recurrent Neural Network</a></div><div class="a"><b>B. Wang</b>, Z. Luo, D. Shi, J. Ji, X. Su, and W.-S. Gan</div><div class="v">Annual Conference of the International Speech Communication Association (Interspeech), 2026.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2604.23144" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2409.05470" target="_blank" rel="noopener">Transferable Selective Virtual Sensing Active Noise Control Technique Based on Metric Learning</a></div><div class="a"><b>B. Wang</b>, D. Shi, Z. Luo, X. Shen, J. Ji, and W.-S. Gan</div><div class="v">IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2025.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2409.05470" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2601.06981" target="_blank" rel="noopener">Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments</a></div><div class="a"><b>B. Wang</b>, Z. Luo, H. Li, D. Shi, J. Ji, Z. Yang, and W.-S. Gan</div><div class="v">Asia-Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA ASC), 2025.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2601.06981" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2608.02421" target="_blank" rel="noopener">Deep Learning-Based Active Trim Panels for Enhanced Aircraft Interior Noise Control</a></div><div class="a"><b>B. Wang</b>, M. Misol, Z. Luo, J. Ji, X. Shen, D. Shi, and W.-S. Gan</div><div class="v">International Congress on Sound and Vibration (ICSV), 2025.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2608.02421" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2405.14158" target="_blank" rel="noopener">Computation-Efficient Virtual Sensing Approach with Multichannel Adjoint Least Mean Square Algorithm</a></div><div class="a"><b>B. Wang</b>, J. Ji, X. Shen, D. Shi, and W.-S. Gan</div><div class="v">International Congress and Exposition on Noise Control Engineering (INTER-NOISE), 2024.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2405.14158" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t">Prompt-Guided Active Noise Control with Directional Sound Preservation in Multi-Source Environments</div><div class="a">Z. Yang, Z. Luo, T. Xiao, <b>B. Wang</b>, Q. Huang, and W.-S. Gan</div><div class="v">IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2027 (Under review).</div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2601.15653" target="_blank" rel="noopener">Distributed Multichannel Active Noise Control with Asynchronous Communication</a></div><div class="a">J. Ji, D. Shi, <b>B. Wang</b>, Z. Yang, H. Li, and W.-S. Gan</div><div class="v">IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2026.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2601.15653" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2601.15889" target="_blank" rel="noopener">A Stabilized Hybrid Active Noise Control Algorithm of GFANC and FxNLMS with Online Clustering</a></div><div class="a">Z. Luo, H. Ma, <b>B. Wang</b>, Z. Yang, D. Shi, and W.-S. Gan</div><div class="v">IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2026.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2601.15889" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2607.17165" target="_blank" rel="noopener">Adaptive Momentum Enhanced Distributed Multichannel Active Noise Control for Faster Convergence under Communication Delays</a></div><div class="a">J. Ji, W.-S. Gan, <b>B. Wang</b>, Z. Yang, and H. Li</div><div class="v">European Signal Processing Conference (EUSIPCO), 2026.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2607.17165" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2605.00494" target="_blank" rel="noopener">Transformer-Based End-to-End Control Filter Generation for Active Noise Control</a></div><div class="a">Z. Yang, Z. Luo, Y. Zou, <b>B. Wang</b>, Q. Huang, and W.-S. Gan</div><div class="v">International Congress and Exposition on Noise Control Engineering (INTER-NOISE), 2026.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2605.00494" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2412.18887" target="_blank" rel="noopener">Preventing Output Saturation in Active Noise Control: An Output-Constrained Kalman Filter Approach</a></div><div class="a">J. Ji, D. Shi, <b>B. Wang</b>, X. Shen, Z. Luo, and W.-S. Gan</div><div class="v">IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2025.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2412.18887" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://doi.org/10.1109/ICASSP49660.2025.10889743" target="_blank" rel="noopener">Assessing Robustness of Multi-Modal Large Language Models in Image Classification through Hierarchical WordNet-Based Evaluation</a></div><div class="a">C. Liu, H. Chen, <b>B. Wang</b>, and S. Zheng</div><div class="v">IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2025.</div><div class="tags"><a class="tag link" href="https://doi.org/10.1109/ICASSP49660.2025.10889743" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2511.08012" target="_blank" rel="noopener">DOA Estimation with Lightweight Network on LLM-Aided Simulated Acoustic Scenes</a></div><div class="a">H. Li, Z. Luo, D. Shi, <b>B. Wang</b>, J. Ji, Z. Yang, and W.-S. Gan</div><div class="v">Asia-Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA ASC), 2025.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2511.08012" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2510.00934" target="_blank" rel="noopener">A Robust Proactive Communication Strategy for Distributed Active Noise Control Systems</a></div><div class="a">J. Ji, D. Shi, Z. Luo, <b>B. Wang</b>, Z. Yang, H. Li, and W.-S. Gan</div><div class="v">Asia-Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA ASC), 2025.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2510.00934" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://doi.org/10.1109/APSIPAASC65261.2025.11249354" target="_blank" rel="noopener">Meta-Learned Regional Initialization of Control Filters for Headphone Active Noise Control</a></div><div class="a">Z. Yang, Z. Luo, D. Shi, J. Ji, <b>B. Wang</b>, H. Li, Q. Huang, and W.-S. Gan</div><div class="v">Asia-Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA ASC), 2025.</div><div class="tags"><a class="tag link" href="https://doi.org/10.1109/APSIPAASC65261.2025.11249354" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://doi.org/10.1109/ICFEICT57213.2022.00093" target="_blank" rel="noopener">Positioning Performance Evaluation for 5G Positioning Reference Signal</a></div><div class="a">S. Huang, H.-M. Chen, <b>B. Wang</b>, J. Chai, X. Wu, and F. Li</div><div class="v">International Conference on Frontiers of Electronics, Information and Computation Technologies (ICFEICT), 2022.</div><div class="tags"><a class="tag link" href="https://doi.org/10.1109/ICFEICT57213.2022.00093" target="_blank" rel="noopener">Paper</a></div></div>
+    <h3 class="sub">Journal Papers</h3><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2607.12807" target="_blank" rel="noopener">Spatial-Frequency Cued Generative Fixed-Filter Active Noise Control Based on Deep Learning in Reverberant Environments</a></div><div class="a"><b>B. Wang</b>, H. Li, D. Shi, J. Ji, Z. Yang, Z. Luo, and W.-S. Gan</div><div class="v">Signal Processing, 2026.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2607.12807" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2609.30945" target="_blank" rel="noopener">Coupled Meta-Adaptive Filtering for Active Noise Control Under Time-Varying Acoustic Paths</a></div><div class="a"><b>B. Wang</b>, Z. Luo, Z. Yang, D. Shi, X. Liu, and W.-S. Gan</div><div class="v">Signal Processing <span class="st">(Under review)</span>.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2609.30945" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t">Perturbation-Informed Deep Control Filter Generation for Active Noise Control in Hearables</div><div class="a"><b>B. Wang</b>, Z. Luo, D. Shi, J. Ji, and W.-S. Gan</div><div class="v">IEEE Signal Processing Letters <span class="st">(Under review)</span>.</div></div><div class="pub"><div class="t">Implementation of Predictive Selective Fixed-Filter Active Noise Control for Dynamic Noise Sources via Deep Learning-Based Frequency-Direction Forecasting</div><div class="a"><b>B. Wang</b>, J. Ji, Z. Luo, D. Shi, Z. Yang, and W.-S. Gan</div><div class="v">IEEE/ACM Transactions on Audio, Speech, and Language Processing <span class="st">(In preparation)</span>.</div></div><div class="pub"><div class="t"><a href="https://doi.org/10.1016/j.sigpro.2026.110695" target="_blank" rel="noopener">Reinforcement Learning-Based Selective Fixed-Filter Active Noise Control (RL-SFANC): From Theory to Real-Time Headphone Implementation</a></div><div class="a">Z. Luo, H. Ma, <b>B. Wang</b>, D. Shi, and W.-S. Gan</div><div class="v">Signal Processing, 2026.</div><div class="tags"><a class="tag link" href="https://doi.org/10.1016/j.sigpro.2026.110695" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2609.07173" target="_blank" rel="noopener">Direction-Preserving Active Noise Control with a Conditional Control-Filter Estimation Network</a></div><div class="a">Z. Yang, Z. Luo, <b>B. Wang</b>, L. Zhang, and W.-S. Gan</div><div class="v">IEEE/ACM Transactions on Audio, Speech, and Language Processing <span class="st">(Under review)</span>.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2609.07173" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://doi.org/10.1016/j.ymssp.2025.113207" target="_blank" rel="noopener">Deep Learning-Based Generative Fixed-Filter Active Noise Control: Transferability and Implementation</a></div><div class="a">Z. Luo, J. Ji, <b>B. Wang</b>, D. Shi, H. Ma, and W.-S. Gan</div><div class="v">Mechanical Systems and Signal Processing, 2025.</div><div class="tags"><a class="tag link" href="https://doi.org/10.1016/j.ymssp.2025.113207" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2507.12045" target="_blank" rel="noopener">Self-Boosted Weight-Constrained FxLMS: A Robustness Distributed Active Noise Control Algorithm without Internode Communication</a></div><div class="a">J. Ji, D. Shi, Z. Luo, <b>B. Wang</b>, and W.-S. Gan</div><div class="v">IEEE Signal Processing Letters, 2025.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2507.12045" target="_blank" rel="noopener">Paper</a></div></div><h3 class="sub">Conference Papers</h3><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2604.23144" target="_blank" rel="noopener">Predictive Directional Selective Fixed-Filter Active Noise Control for Moving Sources via a Convolutional Recurrent Neural Network</a></div><div class="a"><b>B. Wang</b>, Z. Luo, D. Shi, J. Ji, X. Su, and W.-S. Gan</div><div class="v">Annual Conference of the International Speech Communication Association (Interspeech), 2026.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2604.23144" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2409.05470" target="_blank" rel="noopener">Transferable Selective Virtual Sensing Active Noise Control Technique Based on Metric Learning</a></div><div class="a"><b>B. Wang</b>, D. Shi, Z. Luo, X. Shen, J. Ji, and W.-S. Gan</div><div class="v">IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2025.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2409.05470" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2601.06981" target="_blank" rel="noopener">Directional Selective Fixed-Filter Active Noise Control Based on a Convolutional Neural Network in Reverberant Environments</a></div><div class="a"><b>B. Wang</b>, Z. Luo, H. Li, D. Shi, J. Ji, Z. Yang, and W.-S. Gan</div><div class="v">Asia-Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA ASC), 2025.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2601.06981" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2608.02421" target="_blank" rel="noopener">Deep Learning-Based Active Trim Panels for Enhanced Aircraft Interior Noise Control</a></div><div class="a"><b>B. Wang</b>, M. Misol, Z. Luo, J. Ji, X. Shen, D. Shi, and W.-S. Gan</div><div class="v">International Congress on Sound and Vibration (ICSV), 2025.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2608.02421" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2405.14158" target="_blank" rel="noopener">Computation-Efficient Virtual Sensing Approach with Multichannel Adjoint Least Mean Square Algorithm</a></div><div class="a"><b>B. Wang</b>, J. Ji, X. Shen, D. Shi, and W.-S. Gan</div><div class="v">International Congress and Exposition on Noise Control Engineering (INTER-NOISE), 2024.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2405.14158" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t">Prompt-Guided Active Noise Control with Directional Sound Preservation in Multi-Source Environments</div><div class="a">Z. Yang, Z. Luo, T. Xiao, <b>B. Wang</b>, Q. Huang, and W.-S. Gan</div><div class="v">IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2027 <span class="st">(Under review)</span>.</div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2601.15653" target="_blank" rel="noopener">Distributed Multichannel Active Noise Control with Asynchronous Communication</a></div><div class="a">J. Ji, D. Shi, <b>B. Wang</b>, Z. Yang, H. Li, and W.-S. Gan</div><div class="v">IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2026.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2601.15653" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2601.15889" target="_blank" rel="noopener">A Stabilized Hybrid Active Noise Control Algorithm of GFANC and FxNLMS with Online Clustering</a></div><div class="a">Z. Luo, H. Ma, <b>B. Wang</b>, Z. Yang, D. Shi, and W.-S. Gan</div><div class="v">IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2026.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2601.15889" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2607.17165" target="_blank" rel="noopener">Adaptive Momentum Enhanced Distributed Multichannel Active Noise Control for Faster Convergence under Communication Delays</a></div><div class="a">J. Ji, W.-S. Gan, <b>B. Wang</b>, Z. Yang, and H. Li</div><div class="v">European Signal Processing Conference (EUSIPCO), 2026.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2607.17165" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2605.00494" target="_blank" rel="noopener">Transformer-Based End-to-End Control Filter Generation for Active Noise Control</a></div><div class="a">Z. Yang, Z. Luo, Y. Zou, <b>B. Wang</b>, Q. Huang, and W.-S. Gan</div><div class="v">International Congress and Exposition on Noise Control Engineering (INTER-NOISE), 2026.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2605.00494" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2412.18887" target="_blank" rel="noopener">Preventing Output Saturation in Active Noise Control: An Output-Constrained Kalman Filter Approach</a></div><div class="a">J. Ji, D. Shi, <b>B. Wang</b>, X. Shen, Z. Luo, and W.-S. Gan</div><div class="v">IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2025.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2412.18887" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://doi.org/10.1109/ICASSP49660.2025.10889743" target="_blank" rel="noopener">Assessing Robustness of Multi-Modal Large Language Models in Image Classification through Hierarchical WordNet-Based Evaluation</a></div><div class="a">C. Liu, H. Chen, <b>B. Wang</b>, and S. Zheng</div><div class="v">IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2025.</div><div class="tags"><a class="tag link" href="https://doi.org/10.1109/ICASSP49660.2025.10889743" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2511.08012" target="_blank" rel="noopener">DOA Estimation with Lightweight Network on LLM-Aided Simulated Acoustic Scenes</a></div><div class="a">H. Li, Z. Luo, D. Shi, <b>B. Wang</b>, J. Ji, Z. Yang, and W.-S. Gan</div><div class="v">Asia-Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA ASC), 2025.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2511.08012" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://arxiv.org/abs/2510.00934" target="_blank" rel="noopener">A Robust Proactive Communication Strategy for Distributed Active Noise Control Systems</a></div><div class="a">J. Ji, D. Shi, Z. Luo, <b>B. Wang</b>, Z. Yang, H. Li, and W.-S. Gan</div><div class="v">Asia-Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA ASC), 2025.</div><div class="tags"><a class="tag link" href="https://arxiv.org/abs/2510.00934" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://doi.org/10.1109/APSIPAASC65261.2025.11249354" target="_blank" rel="noopener">Meta-Learned Regional Initialization of Control Filters for Headphone Active Noise Control</a></div><div class="a">Z. Yang, Z. Luo, D. Shi, J. Ji, <b>B. Wang</b>, H. Li, Q. Huang, and W.-S. Gan</div><div class="v">Asia-Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA ASC), 2025.</div><div class="tags"><a class="tag link" href="https://doi.org/10.1109/APSIPAASC65261.2025.11249354" target="_blank" rel="noopener">Paper</a></div></div><div class="pub"><div class="t"><a href="https://doi.org/10.1109/ICFEICT57213.2022.00093" target="_blank" rel="noopener">Positioning Performance Evaluation for 5G Positioning Reference Signal</a></div><div class="a">S. Huang, H.-M. Chen, <b>B. Wang</b>, J. Chai, X. Wu, and F. Li</div><div class="v">International Conference on Frontiers of Electronics, Information and Computation Technologies (ICFEICT), 2022.</div><div class="tags"><a class="tag link" href="https://doi.org/10.1109/ICFEICT57213.2022.00093" target="_blank" rel="noopener">Paper</a></div></div>
   </section>
 
-  <section id="awards"><h2>Awards</h2><ul class="plain list2"><li><span>Best Paper Award, APSIPA ASC</span><span>2025</span></li><li><span>Best Paper Award Nominee, Nanyang Speech Technology Forum</span><span>2025</span></li><li><span>Travel Grant, IEEE Signal Processing Society</span><span>2025</span></li><li><span>Outstanding Graduate of Beijing (top 5%)</span><span>2022</span></li><li><span>Xiaomi Scholarship, Beijing University of Technology (top 0.1%)</span><span>2021</span></li><li><span>First-Class Scholarship, University College Dublin (top 10%)</span><span>2019 – 2021</span></li><li><span>Teaching Assistant Award, University College Dublin</span><span>2019 – 2021</span></li></ul></section>
+  <section id="awards"><h2>Awards</h2><ul class="plain list2"><li><span>Best Paper Award, APSIPA ASC</span><span>2025</span></li><li><span>Best Paper Award Nominee, Nanyang Speech Technology Forum</span><span>2025</span></li><li><span>Travel Grant, IEEE Signal Processing Society</span><span>2025</span></li><li><span>Outstanding Graduate of Beijing</span><span>2022</span></li><li><span>Xiaomi Scholarship, Beijing University of Technology</span><span>2021</span></li><li><span>First-Class Scholarship, University College Dublin</span><span>2019 – 2021</span></li><li><span>Teaching Assistant Award, University College Dublin</span><span>2019 – 2021</span></li></ul></section>
 
-  <section id="service"><h2>Academic Service</h2><h3 class="sub">Journal reviewer</h3><ul><li>Applied Acoustics</li></ul><h3 class="sub">Conference reviewer</h3><ul><li>IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</li><li>ISCA Interspeech</li><li>Asia-Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA ASC)</li></ul><h3 class="sub">Volunteer</h3><ul><li>Asia-Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA ASC) 2025</li></ul></section>
+  <section id="service"><h2>Academic Service</h2><h3 class="sub">Conference reviewer</h3><ul><li>IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</li><li>ISCA Interspeech</li><li>Asia-Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA ASC)</li></ul><h3 class="sub">Volunteer</h3><ul><li>Asia-Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA ASC) 2025</li></ul></section>
 
   <section id="cv"><h2>CV</h2><p>Download my CV: <a href="Boxiang_Wang_CV.pdf" target="_blank" rel="noopener">PDF</a>.</p></section>
 
@@ -155,6 +241,25 @@ document.getElementById("toggle").addEventListener("click", function () {
   if (dark) document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", "dark");
   try { localStorage.setItem("theme", dark ? "light" : "dark"); } catch (e) {}
 });
+/* Highlight the nav link of the section being read, and keep it in view when the nav scrolls sideways on phones. */
+(function () {
+  var bar = document.querySelector(".topnav .links"), links = [].slice.call(bar.querySelectorAll("a.link"));
+  var secs = links.map(function (a) { return document.getElementById(a.getAttribute("href").slice(1)); });
+  var cur = -1, queued = false;
+  function update() {
+    queued = false;
+    var i, k = 0, doc = document.documentElement;
+    for (i = 0; i < secs.length; i++) if (secs[i] && secs[i].getBoundingClientRect().top <= 140) k = i;
+    if (window.innerHeight + window.pageYOffset >= doc.scrollHeight - 4) k = secs.length - 1;
+    if (k === cur) return;
+    if (cur >= 0) links[cur].classList.remove("on");
+    cur = k; links[k].classList.add("on");
+    if (bar.scrollWidth > bar.clientWidth) bar.scrollLeft = links[k].offsetLeft - bar.offsetLeft - (bar.clientWidth - links[k].offsetWidth) / 2;
+  }
+  window.addEventListener("scroll", function () { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+  window.addEventListener("resize", update);
+  update();
+})();
 </script>
 </body>
 </html>
